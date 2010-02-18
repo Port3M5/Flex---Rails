@@ -1,5 +1,4 @@
 <h1>New Image</h1>
-<% categories = Category.find(:all, :order => :id)%>
 <% form_for(@image) do |f| %>
 	<%= f.error_messages %>
 	
@@ -13,7 +12,7 @@
 	</p>
 	<p>
 		<%= f.label :category_id %><br />
-		<%= f.collection_select :category_id, categories, :id, :name %>
+		<%= collection_select( :images, :category_id, @categories, :id, :name) %>
 	</p>
 <% end %>
 

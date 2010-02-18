@@ -9,10 +9,12 @@ class ImagesController < ApplicationController
   
   def new
     @image = Image.new
+    @categories = Category.all
   end
   
   def create
     @image = Image.new(params[:image])
+    @catgories = Category.all
     
     respond_to do |format|
       if @image.save
