@@ -1,0 +1,8 @@
+<h1>Images</h1>
+<% @images.each do |image|%>
+<h2><%= link_to image.title, image %></h2>
+<p><%= image.category %>
+<%= image_tag image.url %>
+<% end %>
+
+<%= link_to "Add new", new_image_path %>
