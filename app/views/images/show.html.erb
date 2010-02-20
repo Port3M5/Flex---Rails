@@ -1,3 +1,8 @@
 <h1><%= @image.title %></h1>
-<%= @image.category %>
+<p>
+<%= @image.category_id %>
+</p>
+<p>
 <%= image_tag @image.url %>
+</p>
+<%= link_to 'Back to category', category_path(@category)%>
