@@ -1,8 +1,9 @@
 <h1><%= @image.title %></h1>
 <p>
-<%= @image.category_id %>
+<%= @category.name %>
 </p>
 <p>
 <%= image_tag @image.url %>
 </p>
-<%= link_to 'Back to category', category_path(@category)%>
+<%= link_to 'Back to category', @category %> |
+<%= link_to 'Edit', :controller => 'images', :action => 'edit' %>

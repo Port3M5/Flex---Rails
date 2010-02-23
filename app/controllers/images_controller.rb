@@ -2,10 +2,10 @@ class ImagesController < ApplicationController
   before_filter :init
   
   def index
-    @images = @category.images.all
+    @images = @category.images.all :order => 'id DESC'
     
     respond_to do |format|
-      format.html
+      format.html { redirect_to @category}
       format.xml { render :xml => [@category, @images] }
     end
   end
@@ -16,12 +16,12 @@ class ImagesController < ApplicationController
   
   def new
     @categories = Category.all
-    @image = Image.new
+    @image = @category.images.new
   end
   
   def create
-    @image = Image.new(params[:image])
-    @catgories = Category.all
+    @image = @category.images.new(params[:image])
+    @categories = Category.all
     
     respond_to do |format|
       if @image.save
@@ -29,6 +29,25 @@ class ImagesController < ApplicationController
         format.html { redirect_to [@category, @image] }
       else
         format.html { render :action => "new" }
+      end
+    end
+  end
+  
+  def edit
+    @image = @category.images.find(params[:id])
+    @categories = Category.all
+  end
+  
+  def update
+    @image = @category.images.find(params[:id])
+    respond_to do |format|
+      if @image.update_attributes(params[:image])
+        flash[:notice] = "Image Updated"
+        format.html { redirect_to [@category, @image] }
+        format.xml { head :ok}
+      else
+        format.html { render :action => 'edit' }
+        format.xml { render :xml => @image.errors, :status => :unprocessable_entity }
       end
     end
   end
